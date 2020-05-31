@@ -3,27 +3,31 @@ export default {
     return {
       ios:false,
       granted: false,
-      orientation: {},
+      orientation: 0,
     }
   },
   template:`
     <div>
-        <button v-if="ios" @click="requestAccess">Orient</button>{{ios}} - {{granted}} -- {{orientation}}
+        <button v-if="ios && !granted" @click="requestAccess">Access Orientation</button>
     </div>
   `,
   mounted() {
     if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
       this.ios = true
     }
-
     this.addListener();
-
   },
   methods: {
     addListener() {
+          
       window.addEventListener( "deviceorientation", (e) => {
-                  this.orientation = e.alpha
-               }, true)
+                  let {alpha, beta, gamma} = e
+                  this.orientation = {
+                    alpha: alpha.toFixed(2), 
+                    beta: beta.toFixed(2), 
+                    gamma: gamma.toFixed(2)}
+                  this.$emit('orient', this.orientation)
+               })
     },
     requestAccess() {
         DeviceOrientationEvent.requestPermission()
