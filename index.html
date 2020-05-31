@@ -22,7 +22,7 @@
 
 <body>
   <section id="app">
-    <orienter></orienter>
+    <orienter @orient="orient"></orienter>
     <article @touchmove="move" @mousemove="move" class="full" @click="click">
         <point :class="{own:me==key}" v-for="(point, key) in activePoints" :key="key" :point="point"></point>
         <button v-if="ios" @click="requestAccess()"></button>

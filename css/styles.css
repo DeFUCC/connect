@@ -14,6 +14,7 @@
 body {
   margin:0;
   padding:0;
+  transform-style: preserve-3d;
 }
 
 .point {
@@ -24,9 +25,14 @@ body {
   height:16px;
 }
 
+.pointer.orienter {
+  height:36px;
+  width:16px;
+}
+
 .pointer {
   border:2px solid hsla(0,0%,0%,0.3);
-  border-radius:50%;
+  border-radius:16px;
   z-index:10;
   position: absolute;
   width:16px;

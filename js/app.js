@@ -39,9 +39,7 @@ const app = new Vue({
     },
   },
   created() {
-    if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
-      this.ios = true
-    }
+  
   },
   mounted() {
     let myId = localStorage.getItem('me')
@@ -82,13 +80,8 @@ const app = new Vue({
     });
   },
   methods: {
-    requestAccess() {
-        DeviceOrientationEvent.requestPermission()
-            .then(response => {
-              if (response == 'granted') {
-                this.permissionsGranted = true
-              }
-            })
+    orient(orientation) {
+      myGun.get(this.me).put(orientation)
     },
     move(e) {
       if (!this.lock) {

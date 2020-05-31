@@ -42,9 +42,10 @@ export default {
         }">
              
 
-             <div class="pointer" :style="{
+             <div class="pointer" :class="{orienter:point.alpha}" :style="{
                backgroundColor:$color.hex(point.key),
-               top, left
+               top, left,
+               transform: 'rotateZ('+(-point.alpha)+'deg)'+ ' rotateX('+(-point.beta)+'deg)' + ' rotateY('+(point.gamma)+'deg)'
              }">
              </div>
         </div>
