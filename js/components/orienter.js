@@ -11,13 +11,13 @@ export default {
         <button v-if="ios" @click="requestAccess">Orient</button>{{ios}} - {{granted}} -- {{orientation}}
     </div>
   `,
-  created() {
+  mounted() {
     if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
       this.ios = true
     }
-    if (!this.ios) {
-      this.addListener();
-    }
+
+    this.addListener();
+
   },
   methods: {
     addListener() {
