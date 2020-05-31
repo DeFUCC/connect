@@ -21,8 +21,8 @@ export default {
   },
   methods: {
     addListener() {
-      window.addEventListener( "devicemotion", (e) => {
-                  this.orientation = e
+      window.addEventListener( "deviceorientation", (e) => {
+                  this.orientation = e.alpha
                })
     },
     requestAccess() {
