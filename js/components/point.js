@@ -52,4 +52,7 @@ export default {
   methods: {
 
   },
+  beforeDestroy() {
+    clearTimeout(this.loop)
+  }
 }
