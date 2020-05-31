@@ -25,7 +25,7 @@
 
     <article @touchmove="move" @mousemove="move" class="full" @click="click">
         <point :class="{own:me==key}" v-for="(point, key) in activePoints" :key="key" :point="point"></point>
-        <button v-if="ios"></button>
+        <button v-if="ios" @click="requestAccess()"></button>
         <b v-if="permissionsGranted">gotcha</b>
 
     </article>
