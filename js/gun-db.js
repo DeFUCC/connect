@@ -1,6 +1,6 @@
 const gun = new Gun([
 //  'https://gun-vue.glitch.me/gun',
-  'http://localhost:4200/gun'
+  'http://192.168.1.2:4200/gun'
 ])
 
 export default gun
