@@ -23,8 +23,16 @@ const app = new Vue({
     me: '',
     points:{},
   },
-  watch: {
-
+  computed: {
+    activePoints() {
+      let active = {}
+      Object.values(this.points).forEach((point) => {
+        if (point.online) {
+          active[point.key] = point
+        }
+      })
+      return active
+    },
   },
   created() {
 
@@ -59,7 +67,7 @@ const app = new Vue({
           updated: Gun.state(),
         })
       }
-    }, 250);
+    }, 500);
 
     window.addEventListener('beforeunload', () => {
       myGun.get(myId).put({

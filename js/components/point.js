@@ -19,15 +19,27 @@ export default {
       }
         return null
     },
+    top() {
+      return Math.floor(this.point.y * document.documentElement.clientHeight) + 'px'
+    },
+    left() {
+      return Math.floor(this.point.x * document.documentElement.clientWidth) + 'px'
+    },
   },
   created() {
 
   },
   template: `
-        <div v-if="point.online" class="point" :style="{
+        <div class="point" :style="{
           backgroundColor:$color.hex(point.key),
         }">
-             {{age}} {{point.x}} {{point.y}}
+             {{age}}
+
+             <div class="pointer" :style="{
+               backgroundColor:$color.hex(point.key),
+               top, left
+             }">
+             </div>
         </div>
   `,
   watch: {

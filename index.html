@@ -19,10 +19,10 @@
 </head>
 
 <body>
-  <section class="full" id="app">
+  <section id="app">
+
     <article @mousemove="move" class="full" @click="click">
-        {{me}}
-        <point v-for="(point, key) in points" :key="key" :point="point"></point>
+        <point :class="{own:me==key}" v-for="(point, key) in activePoints" :key="key" :point="point"></point>
 
     </article>
   </section>
