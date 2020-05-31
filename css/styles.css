@@ -16,19 +16,16 @@ body {
   padding:0;
 }
 
-nav {
-  flex: 1 1 100%;
-  height:22px;
-}
-
 .point {
-  padding:0.62em;
-  border-radius: 8px;
-  flex:1 1 30px;
+  padding:0;
+  border-radius: 50%;
+  border: 2px solid hsla(0,0%,0%,0.3);
+  flex:0 0 16px;
+  height:16px;
 }
 
 .pointer {
-  border:1px solid hsla(0,0%,0%,0.5);
+  border:2px solid hsla(0,0%,0%,0.3);
   border-radius:50%;
   z-index:10;
   position: absolute;
@@ -37,9 +34,9 @@ nav {
 }
 
 .own {
-  border: 2px solid hsla(0,0%,0%,0.6);
+  border: 2px solid hsla(0,0%,0%,0.8);
 }
 
 .own .pointer {
-  border-width:2px;
+  border:2px solid hsla(0,0%,0%,0.8);
 }

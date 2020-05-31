@@ -14,7 +14,7 @@ const interval = setInterval(() => {
   myGun.map().once((data,key) => {
     let state = Gun.state();
     let age = state-data.updated
-    if (age>3000 || !data.updated) {
+    if (age>5000 || !data.updated) {
       myGun.get(key).put({
         online:false,
       })
@@ -25,4 +25,4 @@ const interval = setInterval(() => {
     }
   })
 
-}, 3000);
+}, 5000);

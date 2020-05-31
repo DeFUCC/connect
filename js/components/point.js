@@ -40,7 +40,7 @@ export default {
         <div class="point" :style="{
           backgroundColor:$color.hex(point.key),
         }">
-             {{age}}
+             
 
              <div class="pointer" :style="{
                backgroundColor:$color.hex(point.key),

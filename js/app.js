@@ -21,6 +21,8 @@ const app = new Vue({
       y:0,
     },
     me: '',
+    ios:false,
+    permissionsGranted:false,
     points:{},
   },
   computed: {
@@ -35,7 +37,9 @@ const app = new Vue({
     },
   },
   created() {
-
+    if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
+      this.ios = true
+    }
   },
   mounted() {
     let myId = localStorage.getItem('me')
@@ -76,6 +80,14 @@ const app = new Vue({
     });
   },
   methods: {
+    requestAccess() {
+        DeviceOrientationEvent.requestPermission()
+            .then(responce => {
+              if (response == 'granted') {
+                this.permissionsGranted = true
+              }
+            })
+    },
     move(e) {
       if (!this.lock) {
         let x,y;
