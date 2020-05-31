@@ -1,0 +1,17 @@
+.full {
+  width:100vw;
+  height: 100vh;
+  user-select:none;
+  position:relative;
+}
+
+body {
+  margin:0;
+  padding:0;
+}
+
+.point {
+  position:absolute;
+  padding:0.5em;
+  border-radius: 4px;
+}
