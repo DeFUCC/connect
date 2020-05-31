@@ -70,12 +70,13 @@ const app = new Vue({
   methods: {
     move(e) {
       if (!this.lock) {
-        console.log(e)
-        this.position = {
-          x: e.pageX,
-          y: e.pageY,
+        let doc = document.documentElement
+        let pos = {
+          x: 1 - (doc.clientWidth - e.pageX)/doc.clientWidth,
+          y: 1 - (doc.clientHeight - e.pageY)/doc.clientHeight,
         };
-        myGun.get(this.me).put(this.position)
+        this.position = pos
+        myGun.get(this.me).put(pos)
       }
     },
     click(e) {

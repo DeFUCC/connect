@@ -26,10 +26,8 @@ export default {
   template: `
         <div v-if="point.online" class="point" :style="{
           backgroundColor:$color.hex(point.key),
-          top: point.y +'px',
-          left: point.x +'px',
         }">
-             {{age}}
+             {{age}} {{point.x}} {{point.y}}
         </div>
   `,
   watch: {
