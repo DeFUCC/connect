@@ -23,7 +23,7 @@ export default {
     addListener() {
       window.addEventListener( "deviceorientation", (e) => {
                   this.orientation = e.alpha
-               })
+               }, true)
     },
     requestAccess() {
         DeviceOrientationEvent.requestPermission()
