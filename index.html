@@ -23,7 +23,7 @@
 <body>
   <section id="app">
 
-    <article @mousemove="move" class="full" @click="click">
+    <article @touchmove="move" @mousemove="move" class="full" @click="click">
         <point :class="{own:me==key}" v-for="(point, key) in activePoints" :key="key" :point="point"></point>
 
     </article>

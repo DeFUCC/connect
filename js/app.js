@@ -78,15 +78,24 @@ const app = new Vue({
   methods: {
     move(e) {
       if (!this.lock) {
+        let x,y;
+        if (e.changedTouches) {
+          x = e.changedTouches[0].pageX;
+          y = e.changedTouches[0].pageY;
+        } else {
+          x = e.pageX;
+          y = e.pageY;
+        }
         let doc = document.documentElement
         let pos = {
-          x: 1 - (doc.clientWidth - e.pageX)/doc.clientWidth,
-          y: 1 - (doc.clientHeight - e.pageY)/doc.clientHeight,
+          x: 1 - (doc.clientWidth - x)/doc.clientWidth,
+          y: 1 - (doc.clientHeight - y)/doc.clientHeight,
         };
         this.position = pos
         myGun.get(this.me).put(pos)
       }
     },
+
     click(e) {
       this.lock=!this.lock
     },
