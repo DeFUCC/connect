@@ -1,5 +1,6 @@
 import {myGun} from './gun-db.js'
 import point from './components/point.js'
+import orienter from './components/orienter.js'
 
 
 
@@ -7,6 +8,7 @@ const app = new Vue({
   el:'#app',
   components: {
     point,
+    orienter,
   },
   data:{
     now: Date.now(),
