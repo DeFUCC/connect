@@ -82,7 +82,7 @@ const app = new Vue({
   methods: {
     requestAccess() {
         DeviceOrientationEvent.requestPermission()
-            .then(responce => {
+            .then(response => {
               if (response == 'granted') {
                 this.permissionsGranted = true
               }
