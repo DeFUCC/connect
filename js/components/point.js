@@ -23,17 +23,14 @@ export default {
       return null
     },
     top() {
-      return Math.floor(this.pos.y * document.documentElement.clientHeight) + 'px'
+      return Math.floor(this.point.y * document.documentElement.clientHeight) + 'px'
     },
     left() {
-      return Math.floor(this.pos.x * document.documentElement.clientWidth) + 'px'
+      return Math.floor(this.point.x * document.documentElement.clientWidth) + 'px'
     }
   },
   created() {
-    this.loop = setInterval(() => {
-      this.pos.x = this.point.x;
-      this.pos.y = this.point.y
-    }, 10);
+
   },
   template: `
         <div class="point" :style="{
