@@ -2,30 +2,28 @@ import {myGun} from './gun-db.js'
 import point from './components/point.js'
 import orienter from './components/orienter.js'
 
-
-
 const app = new Vue({
-  el:'#app',
+  el: '#app',
   components: {
     point,
-    orienter,
+    orienter
   },
-  data:{
+  data: {
     now: Date.now(),
-    text:'hello',
+    text: 'hello',
     position: {
-      x:0,
-      y:0,
+      x: 0,
+      y: 0
     },
-    lock:false,
+    lock: false,
     lockPosition: {
-      x:0,
-      y:0,
+      x: 0,
+      y: 0
     },
     me: '',
-    ios:false,
-    permissionsGranted:false,
-    points:{},
+    ios: false,
+    permissionsGranted: false,
+    points: {}
   },
   computed: {
     activePoints() {
@@ -36,16 +34,14 @@ const app = new Vue({
         }
       })
       return active
-    },
+    }
   },
-  created() {
-  
-  },
+  created() {},
   mounted() {
     let myId = localStorage.getItem('me')
     let me = {
       connected: Gun.state(),
-      online:true,
+      online: true
     };
     let gunMe
     if (!myId) {
@@ -54,9 +50,9 @@ const app = new Vue({
       gunMe = myGun.get(myId).put(me)
     }
 
-    gunMe.once((data,key) => {
+    gunMe.once((data, key) => {
       this.me = key
-      localStorage.setItem('me',key)
+      localStorage.setItem('me', key)
     })
 
     myGun.map().on((data, key) => {
@@ -67,25 +63,19 @@ const app = new Vue({
     const interval = setInterval(() => {
       this.now = Gun.state();
       if (this.me) {
-        myGun.get(this.me).put({
-          updated: Gun.state(),
-        })
+        myGun.get(this.me).put({updated: Gun.state()})
       }
     }, 500);
 
     window.addEventListener('beforeunload', () => {
-      myGun.get(myId).put({
-        online:false,
-      })
+      myGun.get(myId).put({online: false})
     });
   },
   methods: {
-    orient(orientation) {
-      myGun.get(this.me).put(orientation)
-    },
     move(e) {
       if (!this.lock) {
-        let x,y;
+        let x,
+          y;
         if (e.changedTouches) {
           x = e.changedTouches[0].pageX;
           y = e.changedTouches[0].pageY;
@@ -95,8 +85,8 @@ const app = new Vue({
         }
         let doc = document.documentElement
         let pos = {
-          x: 1 - (doc.clientWidth - x)/doc.clientWidth,
-          y: 1 - (doc.clientHeight - y)/doc.clientHeight,
+          x: 1 - (doc.clientWidth - x) / doc.clientWidth,
+          y: 1 - (doc.clientHeight - y) / doc.clientHeight
         };
         this.position = pos
         myGun.get(this.me).put(pos)
@@ -104,10 +94,8 @@ const app = new Vue({
     },
 
     click(e) {
-      this.lock=!this.lock
-    },
+      this.lock = !this.lock
+    }
   },
-  beforeDestroy() {
-
-  }
+  beforeDestroy() {}
 })

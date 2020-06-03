@@ -1,12 +1,12 @@
 export default {
   data() {
     return {
-      ios:false,
+      ios: false,
       granted: false,
       orientation: 0,
     }
   },
-  template:`
+  template: `
     <div>
         <button v-if="ios && !granted" @click="requestAccess">Access Orientation</button>
     </div>
@@ -19,24 +19,29 @@ export default {
   },
   methods: {
     addListener() {
-          
-      window.addEventListener( "deviceorientation", (e) => {
-                  let {alpha, beta, gamma} = e
-                  this.orientation = {
-                    alpha: alpha.toFixed(2), 
-                    beta: beta.toFixed(2), 
-                    gamma: gamma.toFixed(2)}
-                  this.$emit('orient', this.orientation)
-               })
+
+      window.addEventListener("deviceorientation", (e) => {
+        let {
+          alpha,
+          beta,
+          gamma
+        } = e
+        this.orientation = {
+          alpha: alpha.toFixed(2),
+          beta: beta.toFixed(2),
+          gamma: gamma.toFixed(2)
+        }
+        this.$emit('orient', this.orientation)
+      })
     },
     requestAccess() {
-        DeviceOrientationEvent.requestPermission()
-            .then(response => {
-              if (response == 'granted') {
-                this.granted = true;
-                this.addListener();
-              }
-            })
+      DeviceOrientationEvent.requestPermission()
+        .then(response => {
+          if (response == 'granted') {
+            this.granted = true;
+            this.addListener();
+          }
+        })
     },
   }
 }
