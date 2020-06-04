@@ -25,13 +25,11 @@
   <body>
     <section id="app">
       <orienter @orient="orient"></orienter>
-      <article @touchmove="move" @mousemove="move" class="full" @click="click">
+
+      <main @touchmove="move" @mousemove="move" class="full" @click="clickLock">
         <point :class="{own:me==key}" v-for="(point, key) in activePoints" :key="key" :point="point"></point>
-        <button v-if="ios" @click="requestAccess()"></button>
-
-      </article>
+      </main>
     </section>
-
     <script type="module" src="js/app.js"></script>
 
   </body>

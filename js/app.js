@@ -1,8 +1,11 @@
-import {myGun} from './gun-db.js'
+Vue.use(vueCompositionApi.default)
+
+import {sync} from './gun-db.js'
+import {useMove} from './use/useMove.js'
+// import {useGunPoint} from './use/useGunPoint.js'
+
 import point from './components/point.js'
 import orienter from './components/orienter.js'
-
-
 
 const app = new Vue({
   el:'#app',
@@ -10,23 +13,17 @@ const app = new Vue({
     point,
     orienter,
   },
+  setup() {
+    return {
+      ...useMove()
+    }
+  },
   data:{
     now: Date.now(),
-    text:'hello',
-    position: {
-      x:0,
-      y:0,
-    },
-    lock:false,
-    lockPosition: {
-      x:0,
-      y:0,
-    },
     me: '',
-    ios:false,
-    permissionsGranted:false,
     points:{},
   },
+
   computed: {
     activePoints() {
       let active = {}
@@ -38,9 +35,6 @@ const app = new Vue({
       return active
     },
   },
-  created() {
-
-  },
   mounted() {
     let myId = localStorage.getItem('me')
     let me = {
@@ -49,9 +43,9 @@ const app = new Vue({
     };
     let gunMe
     if (!myId) {
-      gunMe = myGun.set(me);
+      gunMe = sync.set(me);
     } else {
-      gunMe = myGun.get(myId).put(me)
+      gunMe = sync.get(myId).put(me)
     }
 
     gunMe.once((data,key) => {
@@ -59,7 +53,7 @@ const app = new Vue({
       localStorage.setItem('me',key)
     })
 
-    myGun.map().on((data, key) => {
+    sync.map().on((data, key) => {
       data.key = key;
       this.$set(this.points, key, data)
     })
@@ -67,47 +61,32 @@ const app = new Vue({
     const interval = setInterval(() => {
       this.now = Gun.state();
       if (this.me) {
-        myGun.get(this.me).put({
+        sync.get(this.me).put({
           updated: Gun.state(),
         })
       }
     }, 500);
 
     window.addEventListener('beforeunload', () => {
-      myGun.get(myId).put({
+      sync.get(myId).put({
         online:false,
       })
     });
   },
-  methods: {
-
-    move(e) {
-      if (!this.lock) {
-        let x,y;
-        if (e.changedTouches) {
-          x = e.changedTouches[0].pageX;
-          y = e.changedTouches[0].pageY;
-        } else {
-          x = e.pageX;
-          y = e.pageY;
-        }
-        let doc = document.documentElement
-        let pos = {
-          x: 1 - (doc.clientWidth - x)/doc.clientWidth,
-          y: 1 - (doc.clientHeight - y)/doc.clientHeight,
-        };
-        this.position = pos
-        myGun.get(this.me).put(pos)
+  watch: {
+    position: {
+      deep: true,
+      handler(pos) {
+        sync.get(this.me).put(pos)
       }
     },
-    orient(orientation) {
-      myGun.get(this.me).put(orientation)
-    },
-    click(e) {
-      this.lock=!this.lock
-    },
   },
-  beforeDestroy() {
+  methods: {
 
-  }
+
+    orient(orientation) {
+      sync.get(this.me).put(orientation)
+    },
+
+  },
 })
