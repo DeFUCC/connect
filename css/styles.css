@@ -23,6 +23,7 @@ body {
   border: 2px solid hsla(0,0%,0%,0.3);
   flex:0 0 16px;
   height:16px;
+  transition: all 200ms;
 }
 
 .pointer.orienter {
@@ -37,6 +38,7 @@ body {
   position: absolute;
   width:16px;
   height:16px;
+  transition: all ease 200ms;
 }
 
 .own {

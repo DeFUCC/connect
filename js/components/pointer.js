@@ -1,3 +1,5 @@
+
+
 Vue.prototype.$color = new ColorHash({
   saturation: [
     0.4, 0.65, 0.8
@@ -27,7 +29,7 @@ export default {
         <div class="point" :style="{
           backgroundColor:$color.hex(point.key),
         }">
-             <div class="pointer" :class="{orienter:point.alpha}" :style="{
+             <div class="pointer" :class="{orienter:point.alpha, locked:point.lock}" :style="{
                backgroundColor:$color.hex(point.key),
                top, left,
                transform: 'rotateZ('+(-point.alpha)+'deg)'+ ' rotateX('+(-point.beta)+'deg)' + ' rotateY('+(point.gamma)+'deg)'
