@@ -21,10 +21,8 @@ export function useMove () {
       }
       let w = document.documentElement.clientWidth
       let h = document.documentElement.clientHeight
-
       position.x = 1 - (w - x)/w
       position.y = 1 - (h - y)/h
-
     }
   }
 

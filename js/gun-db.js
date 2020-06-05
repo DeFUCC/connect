@@ -16,10 +16,6 @@ const onlineCheck = setInterval(() => {
       sync.get(key).put({
         online: false,
       })
-    } else {
-      sync.get(key).put({
-        online: true,
-      })
     }
   })
 
