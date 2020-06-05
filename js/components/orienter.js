@@ -14,12 +14,13 @@ export default {
   mounted() {
     if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
       this.ios = true
+      this.requestAccess()
     }
+
     this.addListener();
   },
   methods: {
     addListener() {
-
       window.addEventListener("deviceorientation", (e) => {
         let {
           alpha,
