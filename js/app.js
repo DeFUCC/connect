@@ -4,8 +4,6 @@ import {sync} from './gun-db.js'
 import {useMove} from './use/useMove.js'
 import {useGunPoint} from './use/useGunPoint.js'
 
-import {throttle} from './tools.js'
-
 import point from './components/point.js'
 import orienter from './components/orienter.js'
 
