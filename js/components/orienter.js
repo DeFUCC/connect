@@ -1,5 +1,3 @@
-import {throttle} from '../tools.js'
-
 export default {
   data() {
     return {
@@ -34,8 +32,7 @@ export default {
           beta: beta.toFixed(2),
           gamma: gamma.toFixed(2)
         }
-        let throttledEmitter = throttle(this.$emit, 20)
-        throttledEmitter('orient', this.orientation)
+        this.$emit('orient', this.orientation)
       })
     },
     requestAccess() {
